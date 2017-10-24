@@ -1,6 +1,6 @@
 # Hey Emacs, this is a -*- makefile -*-
 #----------------------------------------------------------------------------
-# WinAVR Makefile Template written by Eric B. Weddington, Jörg Wunsch, et al.
+# WinAVR Makefile Template written by Eric B. Weddington, JÃ¶rg Wunsch, et al.
 #  >> Modified for use with the LUFA project. <<
 #
 # Released to the Public Domain
@@ -285,7 +285,7 @@ CPPFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 #             for use in COFF files, additional information about filenames
 #             and function names needs to be present in the assembler source
 #             files -- see avr-libc docs [FIXME: not yet described there]
-#  -listing-cont-lines: Sets the maximum number of continuation lines of hex 
+#  -listing-cont-lines: Sets the maximum number of continuation lines of hex
 #       dump that will be displayed for a given single line of source input.
 ASFLAGS = $(ADEFS) -Wa,-adhlns=$(<:%.S=$(OBJDIR)/%.lst),-gstabs,--listing-cont-lines=100
 
@@ -501,7 +501,11 @@ asm: $(TARGET).s
 LIBNAME=lib$(TARGET).a
 lib: $(LIBNAME)
 
+#Generate descriptor file
+Descriptors.gen: Descriptors.xml
+	hidrd-convert -i xml -o code < $< > $@
 
+Descriptors.c: Descriptors.gen
 
 # Eye candy.
 # AVR Studio 3.x does not check make's exit code but relies on
@@ -572,9 +576,9 @@ flip: $(TARGET).hex
 	batchisp -hardware usb -device $(MCU_DFU) -operation start reset 0
 
 dfu: $(TARGET).hex
-	dfu-programmer $(MCU_DFU) erase
-	dfu-programmer $(MCU_DFU) flash --debug 1 $(TARGET).hex
-	dfu-programmer $(MCU_DFU) reset
+	sudo dfu-programmer $(MCU_DFU) erase
+	sudo dfu-programmer $(MCU_DFU) flash --debug 1 $(TARGET).hex
+	sudo dfu-programmer $(MCU_DFU) reset
 
 
 flip-ee: $(TARGET).hex $(TARGET).eep
@@ -730,6 +734,7 @@ clean_binary:
 	
 clean_list:
 	@echo $(MSG_CLEANING)
+	$(REMOVE) Descriptors.gen
 	$(REMOVE) $(TARGET).hex
 	$(REMOVE) $(TARGET).eep
 	$(REMOVE) $(TARGET).cof
