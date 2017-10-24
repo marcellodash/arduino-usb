@@ -45,68 +45,7 @@
  */
 const USB_Descriptor_HIDReport_Datatype_t PROGMEM KeyboardReport[] =
 {
-	0x05, 0x01,          /* Usage Page (Generic Desktop)                    */
-	0x09, 0x0C,          /* Usage (Wireless Radio Controls)                 */
-	0xa1, 0x01,          /* Collection (Application)                        */
-
-	// Byte 0
-	// Bit 0
-	0x75, 0x01,          /*   Report Size (1)                               */
-	0x95, 0x01,          /*   Report Count (1)                              */
-	0x09, 0xC6,          /*   Usage (Wireless Radio Button)                 */
-	0x15, 0x00,          /*   Logical Minimum (0)                           */
-	0x25, 0x01,          /*   Logical Maximum (1)                           */
-	0x81, 0x06,          /*   Input (Data, Variable, Relative)              */
-
-	// Bit 1 - 7
-	0x95, 0x01,          /*   Report Count (1)                              */
-	0x75, 0x07,          /*   Report Size (7)                               */
-	0x81, 0x03,          /*   Input (Constant, Variable, Absolute)          */
-
-	0xc0,                /* End Collection                                  */
-
-	0x05, 0x01,          /* Usage Page (Generic Desktop)                    */
-	0x09, 0x06,          /* Usage (Keyboard)                                */
-	0xa1, 0x01,          /* Collection (Application)                        */
-
-    // Byte 1
-    // Bit 0 - 1
-    0x75, 0x01,          /*   Report Size (1)                               */
-    0x95, 0x02,          /*   Report Count (2)                              */
-    0x05, 0x0C,          /*   Usage Page (Consumer)                         */
-    0x19, 0x6F,          /*   Usage Minimum (Brightness Up Button)          */
-    0x29, 0x70,          /*   Usage Maximum (Brightness Down Button)        */
-    0x15, 0x00,          /*   Logical Minimum (0)                           */
-    0x25, 0x01,          /*   Logical Maximum (1)                           */
-    0x81, 0x02,          /*   Input (Data, Variable, Absolute)              */
-
-    // Bit 2 - 7
-    0x95, 0x01,          /*   Report Count (1)                              */
-    0x75, 0x06,          /*   Report Size (6)                               */
-    0x81, 0x03,          /*   Input (Constant, Variable, Absolute)          */
-
-    // Byte 2 - 7
-	0x95, 0x06,          /*   Report Count (6)                              */
-	0x75, 0x08,          /*   Report Size (8)                               */
-	0x15, 0x00,          /*   Logical Minimum (0)                           */
-	0x26, 0xFF, 0,       /*   Logical Maximum (255)                         */
-	0x05, 0x07,          /*   Usage Page (Keyboard)                         */
-	0x19, 0x00,          /*   Usage Minimum (0) 							*/
-	0x29, 0xFF,          /*   Usage Maximum (255)          					*/
-	0x81, 0x00,          /*   Input (Data, Array, Absolute)                 */
-
-    // LED
-	0x95, 0x05,          /*   Report Count (5)                              */
-	0x75, 0x01,          /*   Report Size (1)                               */
-	0x05, 0x08,          /*   Usage Page (LEDs)                             */
-	0x19, 0x01,          /*   Usage Minimum (Num Lock)                      */
-	0x29, 0x05,          /*   Usage Maximum (Kana)                          */
-	0x91, 0x02,          /*   Output (Data, Variable, Absolute)             */
-	0x95, 0x01,          /*   Report Count (1)                              */
-	0x75, 0x03,          /*   Report Size (3)                               */
-	0x91, 0x03,          /*   Output (Const, Variable, Absolute)            */
-
-	0xc0,                /* End Collection                                  */
+	#include "Descriptors.gen"
 };
 
 /** Device descriptor structure. This descriptor, located in FLASH memory, describes the overall
